@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Or Join Meeting</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="public/css/bootstrap.min.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="public/css/style.css" />
   </head>
   <body style="padding-top: 3.5rem">
     <nav class="navbar navbar-expand-md fixed-top">
-      <img src="images/google-meet-icon.png" class="logo" alt="" />
+      <img src="public/images/google-meet-icon.png" class="logo" alt="" />
       <a href="#" class="navbar-brand text-dark">Google Meet</a>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
@@ -38,13 +38,21 @@
                 btn btn-outline-secondary btn-lg
                 text-info
                 font-weight-bold
+                join-meeting
               "
             >
               Join the meeting
             </button>
           </li>
           <li class="nav-item">
-            <button class="btn btn-lg btn-info text-light font-weight-bold">
+            <button
+              class="
+                btn btn-lg btn-info
+                text-light
+                font-weight-bold
+                new-meeting
+              "
+            >
               Start a meeting
             </button>
           </li>
@@ -64,7 +72,13 @@
           <ul class="display-center justify-content-start">
             <li style="padding: 0">
               <button
-                class="btn btn-lg text-light font-weight-bold display-center"
+                class="
+                  btn btn-lg
+                  text-light
+                  font-weight-bold
+                  display-center
+                  new-meeting
+                "
                 style="background-color: #01796b"
               >
                 <span class="material-icons mr-2">video_call</span>New Meeting
@@ -85,15 +99,20 @@
                   type="text"
                   placeholder="Enter a code"
                   style="border: none"
+                  class="enter-code"
                 />
               </button>
             </li>
-            <li class="text-dark font-weight-bold cursor-pointer pl-2">Join</li>
+            <li
+              class="text-dark font-weight-bold cursor-pointer pl-2 join-action"
+            >
+              Join
+            </li>
           </ul>
         </div>
         <div class="container w-50">
           <img
-            src="images/google-meet-people.jpg"
+            src="public/images/google-meet-people.jpg"
             alt=""
             class="signin-image"
           />
@@ -101,7 +120,27 @@
       </div>
     </main>
     <footer class="container">
-      <h6>Learn more about <span class="learn-more text-info">google meet</span> .</h6>
+      <h6>
+        Learn more about <span class="learn-more text-info">google meet</span> .
+      </h6>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(".join-meeting").on("click", () => {
+        $(".enter-code").focus();
+      });
+
+      $(".join-action").on("click", () => {
+        const val = $(".enter-code").val();
+        const meetingUrl = `${window.location.origin}?meetingID=${val}`;
+        window.location.replace(meetingUrl);
+      });
+
+      $(".new-meeting").on("click", () => {
+        const val = Math.floor(Math.random() * 100000000);
+        const meetingUrl = `${window.location.origin}?meetingID=${val}`;
+        window.location.replace(meetingUrl);
+      });
+    </script>
   </body>
 </html>
