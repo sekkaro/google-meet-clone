@@ -6,12 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Google Meet</title>
     <link rel="stylesheet" href="public/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="public/css/style.css" />
+    <script src="public/js/jquery-3.4.1.min.js"></script>
+    <script src="public/js/app.js"></script>
+    <script>
+      $(() => {
+        const params = new URLSearchParams(window.location.search);
+        const meetingId = params.get("meetingID");
+        const userId = window.prompt("Enter your user id");
+        if (!userId || !meetingId) {
+          alert("User id or meeting id is missing");
+          window.location.href = "/action.html";
+          return;
+        }
+
+        $("meetingContainer").show();
+        MyApp._init(userId, meetingId);
+      });
+    </script>
   </head>
   <body>
     <main class="d-flex flex-column home-wrap">
